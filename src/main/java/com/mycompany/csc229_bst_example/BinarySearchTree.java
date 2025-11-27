@@ -1,4 +1,4 @@
-package com.mycompany.csc229_bst_example;
+
 /**
  *
  * @author MoaathAlrajab
@@ -119,8 +119,9 @@ public class BinarySearchTree {
    public void print() {
        System.out.println("\n==== BST Print ===== \n");
         print("", root, false);
+   }
         // ToDo 5: complete the print of the BST
-         private void print(String prefix, BstNode node, boolean isLeft) {
+        private void print(String prefix, BstNode node, boolean isLeft) {
         // ToDo 5: complete the print of the BST
         if (node == null) return;
 
