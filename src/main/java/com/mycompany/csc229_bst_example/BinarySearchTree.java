@@ -57,28 +57,84 @@ public class BinarySearchTree {
     private void doInOrder(BstNode root) {
 
         // ToDo 1: complete InOrder Traversal 
+        if (root == null) return;
+
+        doInOrder(root.getLeft());
+
+        System.out.print(root.getData() + " ");
+
+        doInOrder(root.getRight());;
     }
+
+
         public void preOrderTraversal() {
         doPreOrder(this.root);
         // ToDo 2: complete the pre-order travesal . 
     }
+    
+        private void doPreOrder(BstNode root) {
+
+        if (root == null) return;
+            
+        System.out.print(root.getData() + " ");
+            
+        doPreOrder(root.getLeft());
+            
+        doPreOrder(root.getRight());
+    }
+    
 
     public Integer findHeight() {
-
+        
         // ToDo 3: Find the height of a tree
+        return height(this.root);
+    }
+     private int height(BstNode node) {
+        if (node == null) return -1;
+
+        int leftHeight = height(node.getLeft());
+         
+        int rightHeight = height(node.getRight());
+         
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
     
 
     public int getDepth(BstNode node) {
         //ToDo 4: complete getDepth of a node 
+        return depthHelper(root, node, 0);
+    }
+
+    private int depthHelper(BstNode current, BstNode target, int depth) {
+        if (current == null) return -1;
+        if (current == target) return depth;
+
+        int left = depthHelper(current.getLeft(), target, depth + 1);
+        if (left != -1) return left;
+
+        return depthHelper(current.getRight(), target, depth + 1);
     }
     
    public void print() {
        System.out.println("\n==== BST Print ===== \n");
         print("", root, false);
         // ToDo 5: complete the print of the BST
+         private void print(String prefix, BstNode node, boolean isLeft) {
+        // ToDo 5: complete the print of the BST
+        if (node == null) return;
+
+        System.out.println(prefix + (isLeft ? "├── " : "└── ") + node.getData());
+
+        print(prefix + (isLeft ? "│   " : "    "), node.getLeft(), true);
+        print(prefix + (isLeft ? "│   " : "    "), node.getRight(), false);
     }
-
-
 }
+
+/*
+ This class creates a Binary Search Tree and includes code that allows users
+ to insert new values, traverse the tree, compute its height and depth, and
+ print the tree structure. The operations rely on recursion to explore the left
+ and right subtrees. I used this because recursion provides a straightforward
+ way to move through the tree one level at a time.
+*/
